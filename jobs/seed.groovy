@@ -1,4 +1,4 @@
-workflowJob('experimental_experimental-repo-2_workflow') {
+pipelineJob('experimental_experimental-repo-2_workflow') {
   scm {
     git('git@github.com:puppetlabs/experimental-repo-2.git')
   }
@@ -6,7 +6,7 @@ workflowJob('experimental_experimental-repo-2_workflow') {
     scm('H/5 * * * *')
   }
   definition {
-    cpsSCm {
+    cpsScm {
       scm {
         git('git@github.com:puppetlabs/experimental-repo-2.git')
       }
