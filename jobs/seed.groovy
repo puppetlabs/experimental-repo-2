@@ -1,7 +1,7 @@
 def value_stream = "experimental"
-def group_name = "puppetlabs"
+def owner_name = "waynr"
 def project_name = "experimental-repo-2"
-def branch_api = new URL("https://api.github.com/repos/${group_name}/${project_name}/branches")
+def branch_api = new URL("https://api.github.com/repos/${owner_name}/${project_name}/branches")
 def branches = new groovy.json.JsonSlurper().parse(branch_api.newReader())
 
 branches.each {
@@ -9,7 +9,7 @@ branches.each {
 
   pipelineJob('${value_stream}_${project}_workflow') {
     scm {
-      git('git@github.com:${group_name}/${project_name}.git')
+      git('git@github.com:${owner_name}/${project_name}.git')
     }
     triggers {
       upstream('${value_stream}_experimental-repo-1_workflow_${branch_name}')
@@ -18,7 +18,7 @@ branches.each {
     definition {
       cpsScm {
         scm {
-          git('git@github.com:${group_name}/${project_name}.git')
+          git('git@github.com:${owner_name}/${project_name}.git')
         }
         scriptPath('Jenkinsfile')
       }
