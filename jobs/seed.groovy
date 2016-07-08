@@ -7,7 +7,7 @@ def branches = new groovy.json.JsonSlurper().parse(branch_api.newReader())
 branches.each {
   def branch_name = it.name
 
-  pipelineJob("${value_stream}_${project}_workflow") {
+  pipelineJob("${value_stream}_${project_name}_workflow") {
     scm {
       git("git@github.com:${owner_name}/${project_name}.git")
     }
