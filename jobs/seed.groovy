@@ -7,20 +7,20 @@ def branches = new groovy.json.JsonSlurper().parse(branch_api.newReader())
 branches.each {
   def branch_name = it.name
 
-  pipelineJob('${value_stream}_${project}_workflow') {
+  pipelineJob("${value_stream}_${project}_workflow") {
     scm {
-      git('git@github.com:${owner_name}/${project_name}.git')
+      git("git@github.com:${owner_name}/${project_name}.git")
     }
     triggers {
-      upstream('${value_stream}_experimental-repo-1_workflow_${branch_name}')
-      scm('H/5 * * * *')
+      upstream("${value_stream}_experimental-repo-1_workflow_${branch_name}")
+      scm("H/5 * * * *")
     }
     definition {
       cpsScm {
         scm {
-          git('git@github.com:${owner_name}/${project_name}.git')
+          git("git@github.com:${owner_name}/${project_name}.git")
         }
-        scriptPath('Jenkinsfile')
+        scriptPath("Jenkinsfile")
       }
     }
   }
