@@ -20,7 +20,7 @@ branches.each {
         scm {
           git("git@github.com:${owner_name}/${project_name}.git")
         }
-        scriptPath("Jenkinsfile")
+        scriptPath("jenkins/pipelines/pipe-1.groovy")
       }
     }
   }
