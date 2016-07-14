@@ -8,4 +8,5 @@ node {
      meow.experimental_repo_2_test()
 }
 
-build job: 'experimental_experimental-repo-1_pipe-1_master'
+stage "Trigger experimental-repo-1 pipe-2"
+build job: 'experimental_experimental-repo-1_pipe-2_master'
