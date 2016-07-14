@@ -7,3 +7,5 @@ def meow = fileLoader.fromGit(
 node {
      meow.experimental_repo_2_test()
 }
+
+build job: "${value_stream}_experimental-repo-1_pipe-1_master"
