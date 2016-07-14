@@ -1,11 +1,9 @@
 def value_stream = "experimental"
 def owner_name = "waynr"
 def project_name = "experimental-repo-2"
-def branch_name = "master"
+def branch_name = "${P_GIT_BRANCH_NAME}"
 
-println " P_GIT_BRANCH_NAME = ${P_GIT_BRANCH_NAME}"
-
-pipelineJob("${value_stream}_${project_name}_workflow") {
+pipelineJob("${value_stream}_${project_name}_workflow_${branch_name}") {
   scm {
     git("git@github.com:${owner_name}/${project_name}.git")
   }
@@ -16,7 +14,13 @@ pipelineJob("${value_stream}_${project_name}_workflow") {
   definition {
     cpsScm {
       scm {
-        git("git@github.com:${owner_name}/${project_name}.git")
+        git {
+          remote {
+            name("github")
+            url("git@github.com:${owner_name}/${project_name}.git")  
+          }
+          branch(branch_name)
+        }
       }
       scriptPath("jenkins/pipelines/pipe-1.groovy")
     }
