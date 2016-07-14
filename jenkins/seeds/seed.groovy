@@ -1,27 +1,24 @@
 def value_stream = "experimental"
 def owner_name = "waynr"
 def project_name = "experimental-repo-2"
-def branch_api = new URL("https://api.github.com/repos/${owner_name}/${project_name}/branches")
-def branches = new groovy.json.JsonSlurper().parse(branch_api.newReader())
+def branch_name = "master"
 
-branches.each {
-  def branch_name = it.name
+println " P_GIT_BRANCH_NAME = ${P_GIT_BRANCH_NAME}"
 
-  pipelineJob("${value_stream}_${project_name}_workflow") {
-    scm {
-      git("git@github.com:${owner_name}/${project_name}.git")
-    }
-    triggers {
-      upstream("${value_stream}_experimental-repo-1_workflow_${branch_name}")
-      scm("H/5 * * * *")
-    }
-    definition {
-      cpsScm {
-        scm {
-          git("git@github.com:${owner_name}/${project_name}.git")
-        }
-        scriptPath("jenkins/pipelines/pipe-1.groovy")
+pipelineJob("${value_stream}_${project_name}_workflow") {
+  scm {
+    git("git@github.com:${owner_name}/${project_name}.git")
+  }
+  triggers {
+    upstream("${value_stream}_experimental-repo-1_workflow")
+    scm("H/5 * * * *")
+  }
+  definition {
+    cpsScm {
+      scm {
+        git("git@github.com:${owner_name}/${project_name}.git")
       }
+      scriptPath("jenkins/pipelines/pipe-1.groovy")
     }
   }
 }
