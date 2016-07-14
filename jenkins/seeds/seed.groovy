@@ -8,7 +8,7 @@ pipelineJob("${value_stream}_${project_name}_workflow_${branch_name}") {
     git("git@github.com:${owner_name}/${project_name}.git")
   }
   triggers {
-    upstream("${value_stream}_experimental-repo-1_workflow")
+    upstream("${value_stream}_experimental-repo-1_workflow_master")
     scm("H/5 * * * *")
   }
   definition {
