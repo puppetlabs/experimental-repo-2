@@ -3,12 +3,12 @@ def owner_name = "waynr"
 def project_name = "experimental-repo-2"
 def branch_name = "${P_GIT_BRANCH_NAME}"
 
-pipelineJob("${value_stream}_${project_name}_workflow_${branch_name}") {
+pipelineJob("${value_stream}_${project_name}_pipe-1_${branch_name}") {
   scm {
     git("git@github.com:${owner_name}/${project_name}.git")
   }
   triggers {
-    upstream("${value_stream}_experimental-repo-1_workflow_master")
+    upstream("${value_stream}_experimental-repo-1_pipe-1_master")
     scm("H/5 * * * *")
   }
   definition {
